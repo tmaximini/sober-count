@@ -1,0 +1,57 @@
+org: tmaximini
+app: apollo-lambda-app
+
+custom:
+  secrets: ${file(secrets.json)}
+
+service: apollo-lambda
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-central-1
+  environment:
+    JWT_SECRET: ${self:custom.secrets.JWT_SECRET}
+iamRoleStatements:
+  Effect: "Allow"
+  Action:
+    - "dynamodb:GetItem"
+    - "dynamodb:PutItem"
+    - "dynamodb:Scan"
+    # - "dynamodb:DeleteItem"
+  Resource: "arn:aws:dynamodb:eu-central-1:${self:custom.secrets.AWS_ID}:table/Articles"
+functions:
+  verify-token:
+    handler: functions/authorize.verifyToken
+
+  graphql:
+    # this is formatted as <FILENAME>.<HANDLER>
+    handler: index.graphqlHandler
+    events:
+      - http:
+          path: graphql
+          method: post
+          cors: true
+          integration: lambda-proxy
+      - http:
+          path: graphql
+          method: get
+          cors: true
+          integration: lambda-proxy
+  me:
+    handler: functions/users.me
+    events:
+      - http:
+          path: me
+          method: get
+          cors: true
+          authorizer:
+            name: verify-token # execute this before !
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 3600
+  login:
+    handler: functions/users.signIn
+    events:
+      - http:
+          path: login
+          method: post
+          cors: true

@@ -1,0 +1,72 @@
+@tailwind base;
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  @apply text-2xl;
+  @apply text-gray-900;
+}
+h2 {
+  @apply text-xl;
+  @apply text-gray-900;
+}
+h3 {
+  @apply text-lg;
+}
+a {
+  @apply text-blue-600;
+}
+
+@tailwind components;
+@tailwind utilities;
+
+.headline-landing {
+  font-size: 2rem;
+  line-height: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/* Small (sm) */
+@media (min-width: 640px) {
+  .headline-landing {
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+}
+
+/* Medium (md) */
+@media (min-width: 768px) {
+  .headline-landing {
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+}
+
+/* Large (lg) */
+@media (min-width: 1024px) {
+  .headline-landing {
+    font-size: 4rem;
+    line-height: 4rem;
+  }
+}
+
+/* Extra Large (xl) */
+@media (min-width: 1280px) {
+  .headline-landing {
+    font-size: 6rem;
+    line-height: 6rem;
+  }
+}
+
+/* Extra Large (xxl) */
+@media (min-width: 1800px) {
+  .headline-landing {
+    font-size: 8rem;
+    line-height: 8rem;
+  }
+}

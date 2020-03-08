@@ -1,0 +1,19 @@
+{
+  "name": "sober-count",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Thomas Maximini <tmaximini@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "frontend": "yarn workspace sober-count-ui dev",
+    "backend": "yarn workspace sober-count-backend dev",
+    "start": "concurrently --kill-others-on-fail \"yarn backend\"  \"yarn frontend\""
+  },
+  "dependencies": {
+    "concurrently": "^5.1.0"
+  }
+}
